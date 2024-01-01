@@ -109,7 +109,7 @@ class MidiServer:
                 try:
                     received_message = self.parse_midi_message(message)
                     client.send(received_message.encode('utf-8'))
-                    print(f"Midi Signal sending back: ", received_message.encode('urf-8'))
+                    print(f"Midi Signal sending back: ", received_message.encode('utf-8'))
                 except socket.error:
                     # Handle errors during send (optional)
                     pass
@@ -129,4 +129,8 @@ if __name__ == "__main__":
     PORT = 5050
 
     midi_server = MidiServer(HOST, PORT)
-    midi_server.start()
+
+    try:
+        midi_server.start()
+    except KeyboardInterrupt:
+        print("\nExiting...")
